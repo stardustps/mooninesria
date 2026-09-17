@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <title>Lucreticus Control</title>
+  <title>Mooninesria</title>
   <style>
     :root {
       --md-sys-color-primary: #b8c8ff; --md-sys-color-on-primary: #102c61;
@@ -52,7 +52,7 @@
   </style>
 </head>
 <body><div class="app">
-  <header><p class="eyebrow">Lucreticus Control</p><h1>Kernel tuning</h1><p class="supporting">Change CPU governors and inspect optional boost controls. Settings apply immediately and this module stays passive at boot.</p></header>
+  <header><p class="eyebrow">Mooninesria</p><h1>Kernel tuning</h1><p class="supporting">Change Lucreticus CPU governors and inspect optional boost controls. Settings apply immediately and this module stays passive at boot.</p></header>
   <main>
     <div class="grid">
       <section class="card" aria-labelledby="governor-title"><div class="card-heading"><div><h2 id="governor-title">CPU governor</h2><p class="supporting">Choose a policy for every CPU cluster.</p></div><span class="badge">Runtime</span></div><div class="field"><label for="governor">Governor</label><select id="governor"><option>lucretibalance</option><option>lucretiperf</option><option>lucretibattery</option><option>schedutil</option></select></div><div class="actions"><button type="button" onclick="setGovernor()">Apply governor</button></div></section>
@@ -64,7 +64,7 @@
   </main>
 </div><script type="module">
   import { exec } from 'kernelsu';
-  const ctl = '/data/adb/modules/lucreticus-control/tools/lucreticus/ctl.sh'; const status = document.getElementById('status'); const message = document.getElementById('message');
+  const ctl = '/data/adb/modules/mooninesria/tools/lucreticus/ctl.sh'; const status = document.getElementById('status'); const message = document.getElementById('message');
   async function run(command) { const result = await exec(command); if (result.errno) throw new Error(result.stderr || `Command failed (${result.errno})`); return result.stdout; }
   window.refresh = async () => { try { status.textContent = await run(`sh ${ctl} status`); message.textContent = 'Status updated.'; } catch (error) { message.textContent = error.message; } };
   window.setGovernor = async () => { try { message.textContent = await run(`sh ${ctl} governor ${document.getElementById('governor').value}`) || 'Governor applied.'; await refresh(); } catch (error) { message.textContent = error.message; } };
