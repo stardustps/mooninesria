@@ -1,0 +1,6 @@
+id=lucreticus-control
+name=Lucreticus Control
+version=0.1.0
+versionCode=1
+author=dotarma
+description=Simple KernelSU WebUI for Lucreticus CPU governors, boost controls, and measurements
